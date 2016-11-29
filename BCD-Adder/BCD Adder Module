@@ -1,0 +1,21 @@
+module BCDAdder(S, C, A, B, Cin, seg, an, dp);
+  input [3:0] A, B; // two inputs
+  input Cin; // carry in
+  output [3:0] S; // sum
+  output C; // carry out
+  output [0:6] seg; // segments a, b, c, d, e, f , g
+  output [3:0] an; // anode to enable display
+  output dp; // decimal point
+  wire K, C4; // K and C4 are the carry output of the two adders, respectively
+  wire [3:0] Z, X; // X is the left input of the bottom adder, i.e, 0000 or 0110
+  assign C = K |(Z[3]&Z[2]) | (Z[3]&Z[1]);
+  assign X[3] = 0;
+  assign X[0] = 0;
+  assign X[2] = C;
+  assign X[1] = C;
+  BinaryAdder U1(Z, K, A, B, 0); // calculate the output Carry C based on the circuit for detecting if Z > 9
+  BinaryAdder U2(S, C4, Z, X, 0);
+  bin7seg U3(S, seg, an, dp);
+  // fill in X using C
+  // call BinaryAdder and bin7seg
+endmodule
