@@ -1,0 +1,23 @@
+//note: this calls several other modules from this repo, the adderSubtractor, the multiplexer, and the bin7seg    
+    
+`timescale 1ns / 1ps
+module alu(A, B, operation, result, seg, an, dp);
+  input [3:0] A, B;
+  input [1:0] operation;
+  output [3:0] result;
+  output [0:6] seg;
+  output [3:0] an;
+  output dp;
+  wire [3:0] S, S1, S2; // output of adder-subtractor
+  wire C4, M; // carry out, mode (0 for add, 1 for sub)
+  // connect M to operation[0]
+  assign M = operation[0];
+  assign S1 = A & B;
+  assign S2 = A | B;
+  // call add_subtractor
+  adder_subtractor U1(S, C4, A, B, M);
+  // call mux4x1
+  mux4x1 U2(S, S, S1, S2, operation, result);
+  //call bin7seg to display result
+  bin7seg u3(result, seg, an, dp);
+endmodule
