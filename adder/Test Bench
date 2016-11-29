@@ -1,0 +1,41 @@
+module test;
+  // Inputs
+  reg [2:0] A;
+  reg [2:0] B;
+  reg M;
+  // Outputs
+  wire [2:0] S;
+  wire C3;
+  // Instantiate the Unit Under Test (UUT)
+  adder_sub uut (
+  .S(S),
+  .C3(C3),
+  .A(A),
+  .B(B),
+  .M(M)
+  );
+  initial begin
+    // Initialize Inputs
+    A = 0;
+    B = 0;
+    M = 0;
+    // Wait 100 ns for global reset to finish
+    #100;
+    // Add stimulus here
+    #10 A = 3; B = 1;
+
+    #10 A = 2; B = 2;
+    #10 A = 3; B = 4;
+    #10 A = 4; B = 0;
+    #10 A = 2; B = 6;
+    #10 A = 3; B = 5;
+    #10 M = 1;
+    #10 A = 3; B = 1;
+    #10 A = 3; B = 2;
+    #10 A = 3; B = 3;
+    #10 A = 3; B = 4;
+    #10 A = 3; B = 5;
+    #10 A = 1; B = 4;
+    #10 $stop;
+  end
+endmodule
