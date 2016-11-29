@@ -1,0 +1,10 @@
+module bitP(D, p, e);
+    input [3:0] D;
+    output p, e;
+    wire a, b, c, d;
+    xor u1(a, D[0], D[1]);
+    xor u2(b, a, D[2]);
+    xor u3(c, b, D[3]);
+    assign p = c;
+    xor u4(e, b, c);
+end module
