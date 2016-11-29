@@ -1,3 +1,5 @@
+//note: this cals two other modules in the Verilog repo, BinaryAdder and bin7seg    
+    
 module BCDAdder(S, C, A, B, Cin, seg, an, dp);
   input [3:0] A, B; // two inputs
   input Cin; // carry in
