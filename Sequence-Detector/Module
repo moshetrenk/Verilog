@@ -1,0 +1,46 @@
+module sequence_detector( mclk, clk, reset, x, y, state);
+     input mclk, reset, x;
+      output clk, y;
+      output reg [1:0] state;
+
+    clkDiv cd(mclk, clk);
+
+   always @( posedge clk, posedge reset )
+       if( reset )
+         state <= 2'b00;
+       else
+         case ( state )
+            2'b00:
+              begin
+                 if(x)    
+                     state <= 2'b01;
+                 else 
+                     state <= 2'b00;
+              end
+
+            2'b01:
+              begin
+                if(x)
+                   state <= 2'b01;    
+                else 
+                   state <= 2'b10;
+              end
+            2'b10:
+                 begin
+                    if(x) 
+                      state <= 2'b11;    
+                    else 
+                      state <= 2'b00;
+                 end
+
+            2'b11:
+              begin
+                  if(x)
+                      state <= 2'b01;    
+                  else 
+                      state <= 2'b10;
+              end
+      endcase
+
+      assign y = state[1] & state[0];  // output y at state “11”
+endmodule
