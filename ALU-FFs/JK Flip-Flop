@@ -1,0 +1,11 @@
+module JKFF (J, K, mclk, clk, Q, Qprime);
+  input J, K, mclk;
+  output reg Q;
+  output clk, Qprime;
+  clkDiv U1(mclk, clk); // generating 1Hz clock
+  assign Qprime = ~Q;
+  
+  always @(negedge clk)
+    Q <= J & ~Q || ~K & Q;
+
+endmodule
