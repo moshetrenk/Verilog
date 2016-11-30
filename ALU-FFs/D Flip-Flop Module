@@ -1,0 +1,15 @@
+module Dff (D, mclk, clk, clear, preset, Q);
+  input D, mclk, clear, preset;
+  output reg Q;
+  output clk;
+  clkDiv U1(mclk, clk); // generating 1Hz clock
+  always @(posedge clk, posedge clear, posedge preset)
+    begin
+      if (clear == 1)
+        Q <= 1'b0;
+      else if (preset == 1)
+        Q <= 1'b1;
+      else
+        Q <= D;
+    end
+endmodule
