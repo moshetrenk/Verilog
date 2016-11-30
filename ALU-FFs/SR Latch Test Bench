@@ -1,0 +1,27 @@
+module Sr;
+  // Inputs
+  reg R;
+  reg S;
+  // Outputs
+  wire Q;
+  wire Qprime;
+  // Instantiate the Unit Under Test (UUT)
+  srlatch uut (
+  .R(R),
+  .S(S),
+  .Q(Q),
+  .Qprime(Qprime)
+  );
+  initial begin
+    // Initialize Inputs
+    R = 0;
+    S = 0;
+    // Wait 100 ns for global reset to finish
+    #100 S = 1; R = 0;
+    #100 S = 0; R = 0;
+    #100 S = 0; R = 1;
+    #100 S = 0; R = 0;
+    #100 S = 1; R = 1;
+    // Add stimulus here
+  end
+endmodule
