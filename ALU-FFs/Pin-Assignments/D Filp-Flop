@@ -1,0 +1,9 @@
+NET "mclk" LOC = "B8"; # Bank = 0, Signal name = MCLK
+NET "Clk" LOC = "G1" ; # Bank = 3, Signal name = LD7
+
+NET "Q" LOC = "M5" ; # Bank = 2, Signal name = LD0
+
+NET "Clear" LOC = "N3"; # Bank = 2, Signal name = SW7
+NET "Preset" LOC = "E2"; # Bank = 3, Signal name = SW6
+
+NET "D" LOC = "P11"; # Bank = 2, Signal name = SW0
